@@ -36,7 +36,14 @@ void barometro(){
   alturaAbsoluta = bmp.readAltitude(101325); //Usando presion a nivel del mar como base
   
   if (banderaPresionSuelo == false){
-    muestraPresion = bmp.readPressure();
+    /*Personalmente cuando se trata de tomar una medida inicial o de muestreo
+      prefiero hacer varias lecturas y utilizar un filtro para garantizar que
+      la lectura tiene mayor fiabilidad y no solo depender de una lectura,
+      en este caso creo que un filtro de promedios funciona bien.*/
+    for(int i = 0; i <= 100; i++){
+      muestraPresion += bmp.readPressure();
+    }
+    muestraPresion /= 100; 
     banderaPresionSuelo = true;
   }
   alturaRelativa = bmp.readAltitude(muestraPresion);
