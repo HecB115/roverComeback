@@ -27,7 +27,7 @@ float Ax, Ay, Az, Gx, Gy, Gz, temperaturaMPU;
 //Constantes, variables, instancias para barómetro.
 float alturaRelativa, alturaAbsoluta, presionBarometrica;
 float muestraPresion, temperaturaBMP;
-boolean banderaPresionSuelo = false;
+bool banderaPresionSuelo = false;
   Adafruit_BMP085 bmp;
 
 //Constantes, variables, instancias para magnetómetro.
@@ -47,8 +47,8 @@ float latitudObjetivo = 0.0, longitudObjetivo = 0.0; //Se ingresan manual
 float headingObjetivo = 0.0, distanciaObjetive = 0.0; //Se calculan
 
 //Constantes, variables, instancias para aterrizaje;
-boolean banderaAterrizaje = false, banderaElevacionPositiva = false, banderaGiroscopio = false;
-boolean banderaElevacionNegativa = false, banderaMovimiento = false;
+bool banderaAterrizaje = false, banderaElevacionPositiva = false, banderaGiroscopio = false;
+bool banderaElevacionNegativa = false, banderaMovimiento = false;
 float alturaMaxima = 1000.0;
 uint16_t contadorAscenso = 0, contadorDescenso = 0;
 uint32_t timer2 = millis();
@@ -72,6 +72,7 @@ void loop(){
   ubicacion();
   
   if (millis() - timer2 > 1000 && banderaMovimiento == false) //Comprobar cambios de altura cada 1s
+    timer2 = millis() //Deberia de haber una actualizacion de timer no?
     elevationCheck();
 
   ruta();
